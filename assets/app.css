@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'Avenir-Black';
+  src: url("/assets/fonts/Black.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Avenir-Bold';
+  src: url("/assets/fonts/Bold.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Avenir-Medium';
+  src: url("/assets/fonts/Medium.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Avenir-Regular';
+  src: url("/assets/fonts/Regular.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Avenir-Light';
+  src: url("/assets/fonts/Light.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Avenir-Roman';
+  src: url("/assets/fonts/Roman.ttf") format("truetype"); }
+
+* {
+  margin: 0px;
+  padding: 0px; }
