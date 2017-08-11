@@ -39,6 +39,9 @@ body {
   left: 50%;
   transform: translate(-50%, -50%); }
 
+* {
+  list-style: none; }
+
 .react-autosuggest__container {
   position: relative; }
 
@@ -52,12 +55,46 @@ body {
   color: #24CF5F; }
 
 .react-autosuggest__input:focus {
-  outline: none;
-  border: 2px solid #24CF5F; }
+  outline: none; }
 
 .react-autosuggest__suggestions-container {
   position: absolute;
-  top: 70px; }
+  top: 70px;
+  list-style: none; }
+
+.react-autosuggest__suggestions-container--open {
+  list-style: none;
+  min-width: 530px;
+  border-radius: 3px;
+  border: 1px solid #e2e2e2; }
+
+.artist-name {
+  font-family: 'Avenir-Regular';
+  font-size: 1em;
+  color: #333; }
+
+.artist-img {
+  width: 70px;
+  border-radius: 70px;
+  border: 2px solid #24CF5F; }
+
+.suggestion-link {
+  text-decoration: none; }
+
+.suggestion-container {
+  border-bottom: 1px solid #e2e2e2; }
+  .suggestion-container:hover {
+    background-color: #FAFAFA; }
+
+.inner-suggestion-container {
+  padding: 10px 20px; }
+  .inner-suggestion-container img, .inner-suggestion-container div {
+    display: inline-block;
+    vertical-align: middle; }
+  .inner-suggestion-container p {
+    color: #666666;
+    margin-left: 20px;
+    font-size: 1.5em; }
 
 ::-webkit-input-placeholder {
   /* WebKit, Blink, Edge */

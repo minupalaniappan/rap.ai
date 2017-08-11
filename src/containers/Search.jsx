@@ -10,8 +10,15 @@ var ARTIST_SEARCH_ENDPOINT = decodeURIComponent('https%3A%2F%2Fapi.genius.com%2F
 // render one item on the list
 const renderSuggestion = artist => {
   return (
-    <a href = {`/ai/${artist}`}><div>
-      <div>{artist}</div>
+    <a className = "suggestion-link" href = {`/ai/${artist.id}`}><div>
+      <div className = "suggestion-container">
+      	<div className = "inner-suggestion-container">
+	      	<img src = {artist.image_url} className = "artist-img"/>
+	      	<div>
+	      		<p className = "artist-name">{artist.name}</p>
+	      	</div>
+      	</div>
+      </div>
     </div></a>
   );
 
@@ -52,7 +59,10 @@ export default class Search extends Component {
 				"q": query.value
 			},
 			success: (data) => {
-				var artists = _.uniq(_.pluck(_.pluck(_.pluck(data.response.hits, "result"), "primary_artist"), "name"));
+				var artists = _.uniq(_.pluck(_.pluck(data.response.hits, "result"), "primary_artist"));
+				artists = _.uniq(artists, function(x){
+				    return x.name;
+				});
 				that.setState({
 					artists: artists
 				})

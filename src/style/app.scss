@@ -1,6 +1,10 @@
 @import "fonts";
 @import "layout";
 
+* {
+	list-style: none;
+}
+
 .react-autosuggest__container {
 	position: relative;
 }
@@ -17,12 +21,63 @@
 
 .react-autosuggest__input:focus {
 	outline: none;
-	border: 2px solid #24CF5F;
 }
 
 .react-autosuggest__suggestions-container {
 	position: absolute;
 	top: 70px;
+	list-style: none;
+
+}
+
+.react-autosuggest__suggestions-container--open {
+	list-style: none;
+	min-width: 530px; 
+	border-radius: 3px;
+	border: 1px solid #e2e2e2;
+}
+
+.react-autosuggest__suggestions-list {
+}
+
+.react-autosuggest__suggestion {
+
+}
+
+.artist-name {
+	font-family: 'Avenir-Regular';
+	font-size: 1em; 
+	color: #333;
+}
+
+.artist-img {
+	width: 70px; 
+	border-radius: 70px; 
+	border: 2px solid #24CF5F;
+}
+
+.suggestion-link {
+	text-decoration: none; 
+}
+
+.suggestion-container {
+	border-bottom: 1px solid #e2e2e2;
+	&:hover {
+		background-color: #FAFAFA; 
+	}
+}
+
+.inner-suggestion-container {
+	padding: 10px 20px;
+	img, div {
+		display: inline-block;
+		vertical-align: middle;
+	}
+	p {
+		color: #666666;
+		margin-left: 20px;
+		font-size: 1.5em;
+	}
 }
 
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
