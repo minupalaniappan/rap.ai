@@ -10,9 +10,9 @@ var ARTIST_SEARCH_ENDPOINT = decodeURIComponent('https%3A%2F%2Fapi.genius.com%2F
 // render one item on the list
 const renderSuggestion = artist => {
   return (
-    <div>
+    <a href = {`/ai/${artist}`}><div>
       <div>{artist}</div>
-    </div>
+    </div></a>
   );
 
 } 
@@ -79,7 +79,7 @@ export default class Search extends Component {
 		        suggestions={artists}
 		        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
 		        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-		        getSuggestionValue={this.getSuggestionValue}
+		        getSuggestionValue={() => {}}
 		        renderSuggestion={renderSuggestion}
 		        inputProps={inputProps}
 		    />

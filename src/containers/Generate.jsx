@@ -19,17 +19,7 @@ export default class Generate extends Component {
 	componentWillUnmount() {
 	}
 
-	onChangeQuery(event)
-	{
-		this.setState({
-			query: event.target.value
-		});
-	}
-
 	render() {
-		return 
-		(<div>
-			{this.props.params.artist}
-		</div>)
+		return (<div>{this.props.params.artist}</div>)
 	}
 }
