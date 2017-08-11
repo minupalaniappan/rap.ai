@@ -33,7 +33,19 @@ export default class Generate extends Component {
 	}
 
 	render() {
-		return (<div></div>);
+		var artist = this.state.data;
+		console.log(artist);
+		return (
+			<div className="generate_container">
+				<div className = "artist_header">
+					<img className = "artist" src = {artist.image_url}/>
+					<div className = "sub">
+						<p className="name">{artist.name}</p>
+						<a href = {"https://twitter.com/" + artist.twitter_name}><img className = "social" src={"https://upload.wikimedia.org/wikipedia/fr/archive/c/c8/20160903181213%21Twitter_Bird.svg"}/></a>
+					</div>
+				</div>
+			</div>
+		);
 	}
 }
 

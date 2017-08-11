@@ -80,6 +80,43 @@
 	}
 }
 
+.generate_container {
+	margin-top: 80px;
+}
+
+.artist_header {
+	padding: 40px 0px; 
+	text-align: center; 
+	p, img {
+		vertical-align: middle;
+	}
+	img.artist {
+		width: 140px; 
+		border-radius: 140px; 
+		border: 3px solid #24CF5F; 
+		margin: 10px 0px; 
+	}
+	p.name {
+		margin: 5px 0px;
+		font-family: "Avenir-Medium";
+		font-size: 1.8em;
+		color: #333;
+	}
+}
+
+.sub {
+	* {
+
+		display: inline-block;
+		vertical-align: middle;
+	}
+}
+
+.social {
+	width: 30px;
+	display: inline-block;
+}
+
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
     color:    #c6c6c6;
 }
