@@ -74,7 +74,7 @@ export default class Search extends Component {
 	      onChange: this.onChange
 	    };
 	    return (
-	      <div>
+	      <div className = "child">
 	        <Autosuggest
 		        suggestions={artists}
 		        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
