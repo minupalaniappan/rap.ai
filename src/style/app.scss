@@ -44,6 +44,15 @@
 
 }
 
+.highlight {
+  color: #ee0000;
+  font-weight: bold;
+}
+
+.react-autosuggest__suggestion--focused .highlight {
+  color: #120000;
+}
+
 .artist-name {
 	font-family: 'Avenir-Regular';
 	font-size: 1em; 

@@ -2,13 +2,20 @@ import React, { Component, PropTypes } from 'react';
 import * as _ from 'underscore';
 import $ from 'jquery'
 import Autosuggest from 'react-autosuggest';
+var match = require('autosuggest-highlight/match');
+var parse = require('autosuggest-highlight/match');
 
 
 var RAPGENIUS_ACCESS_TOKEN = "WJCDe9kbzfhPQnwzBXQcMw8JExlRMefEWN19V0elsOMNhriiJodaO9Ld6hQ2TZn9";
 var ARTIST_SEARCH_ENDPOINT = decodeURIComponent('https%3A%2F%2Fapi.genius.com%2Fsearch');
 
 // render one item on the list
-const renderSuggestion = artist => {
+const renderSuggestion = (artist, { query }) => {
+  const matches = match(artist.name, query);
+  if (matches.length) {
+  	console.log(matches);
+  	const parts = parse(artist.name, matches);
+  }
   return (
     <a className = "suggestion-link" href = {`/ai/${artist.id}`}><div>
       <div className = "suggestion-container">
@@ -46,6 +53,18 @@ export default class Search extends Component {
 		return (suggestion.name)
 	}
 
+	escapeRegexCharacters(str) {
+	  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+	}
+
+	removeTrash(value, artists) {
+		const escapedValue = this.escapeRegexCharacters(value.trim());
+		if (escapedValue === '') {
+		   	return [];
+		}
+	  	const regex = new RegExp('\\b' + escapedValue, 'i');
+	  	return artists.filter(artist => regex.test(this.getSuggestionValue(artist)));
+	}
 
 	onSuggestionsFetchRequested(query)
 	{
@@ -63,8 +82,9 @@ export default class Search extends Component {
 				artists = _.uniq(artists, function(x){
 				    return x.name;
 				});
+
 				that.setState({
-					artists: artists
+					artists: that.removeTrash(query.value, artists)
 				})
 			}
 		});

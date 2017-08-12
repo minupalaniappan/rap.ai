@@ -68,6 +68,13 @@ body {
   border-radius: 3px;
   border: 1px solid #e2e2e2; }
 
+.highlight {
+  color: #ee0000;
+  font-weight: bold; }
+
+.react-autosuggest__suggestion--focused .highlight {
+  color: #120000; }
+
 .artist-name {
   font-family: 'Avenir-Regular';
   font-size: 1em;

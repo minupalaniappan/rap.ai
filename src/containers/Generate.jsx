@@ -32,6 +32,7 @@ export default class Generate extends Component {
 	componentWillUnmount() {
 	}
 
+
 	render() {
 		var artist = this.state.data;
 		console.log(artist);
