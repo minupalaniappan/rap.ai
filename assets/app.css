@@ -62,8 +62,8 @@ body {
     font-size: 1.8em; }
   .header-container .header-sub {
     font-family: "Avenir-Regular";
-    color: #bababa;
-    font-size: 1.1em; }
+    color: #7c7c7c;
+    font-size: 1.2em; }
 
 .react-autosuggest__container {
   position: relative; }
@@ -73,8 +73,8 @@ body {
   border-radius: 3px;
   border: 1px solid #e2e2e2;
   min-width: 500px;
-  font-family: 'Avenir-Medium';
-  font-size: 1.5em;
+  font-family: 'Avenir-Regular';
+  font-size: 1.3em;
   color: #24CF5F; }
 
 .react-autosuggest__input:focus {
@@ -162,7 +162,9 @@ body {
 
 ::-webkit-input-placeholder {
   /* WebKit, Blink, Edge */
-  color: #c6c6c6; }
+  color: #c6c6c6;
+  font-family: "Avenir-Regular";
+  font-size: 0.8em; }
 
 :-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */

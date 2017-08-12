@@ -110,7 +110,7 @@ export default class Search extends Component {
 	    return (
 	      <div className = "child">
 	      	<div className = "header-container">
-	      		<p className = "header-one">rap.ai</p>
+	      		<p className = "header-one">RapAI</p>
 	      		<p className = "header-sub">Generate lyrics by studying previous records</p>
 	      	</div>
 	        <Autosuggest
