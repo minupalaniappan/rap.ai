@@ -1,10 +1,26 @@
+$primary-white: #f7f7f7;
+$primary-gray: #f7fbfb;
+
 * {
 	margin: 0px;
 	padding: 0px;
 }
 
+@mixin linear-gradient($from, $to) {
+  	background: $to;
+	background: -moz-linear-gradient(top, $from 0%, $to 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$from), color-stop(100%,$to));
+	background: -webkit-linear-gradient(top, $from 0%,$to 100%);
+	background: -o-linear-gradient(top, $from 0%,$to 100%);
+	background: linear-gradient(to bottom, $from 0%,$to 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#{$from}, endColorstr=#{$to})
+}
+
 html {
-	background-color: #FAFAFA;
+	width: 100%;
+    height: 100%;
+    @include linear-gradient($primary-white, $primary-gray);
+
 }
 
 body {
