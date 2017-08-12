@@ -5,6 +5,22 @@
 	list-style: none;
 }
 
+.header-container {
+	margin: 30px 0px; 
+	text-align: center;
+	.header-one {
+		font-family: "Avenir-Medium"; 
+		color: #66CDAA; 
+		font-size: 2.5em;
+	}
+	.header-sub {
+		font-family: "Avenir-Regular"; 
+		color: #bababa; 
+		font-size: 1.5em;
+		margin: 5px 0px;
+	}
+}
+
 .react-autosuggest__container {
 	position: relative;
 }
@@ -45,18 +61,19 @@
 }
 
 .highlight {
-  color: #ee0000;
-  font-weight: bold;
+  color: #24CF5F;
+  font-family: "Avenir-Medium";
 }
 
 .react-autosuggest__suggestion--focused .highlight {
-  color: #120000;
+  color: #24CF5F;
 }
 
 .artist-name {
 	font-family: 'Avenir-Regular';
 	font-size: 1em; 
 	color: #333;
+	margin-left: 20px;
 }
 
 .artist-img {
@@ -72,7 +89,7 @@
 .suggestion-container {
 	border-bottom: 1px solid #e2e2e2;
 	&:hover {
-		background-color: #FAFAFA; 
+		background-color: #e2e2e2; 
 	}
 }
 
@@ -82,11 +99,19 @@
 		display: inline-block;
 		vertical-align: middle;
 	}
-	p {
-		color: #666666;
-		margin-left: 20px;
-		font-size: 1.5em;
+	span {
+		font-size: 1.5em; 
+		font-family: "Avenir-Regular"; 
+		color: #666;
 	}
+	span.highlight {
+		color: #24CF5F;
+		font-family: "Avenir-Medium"; 
+	}
+}
+
+.marginLeft {
+	margin-left: 20px;
 }
 
 .generate_container {

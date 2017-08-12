@@ -26,6 +26,9 @@
   margin: 0px;
   padding: 0px; }
 
+html {
+  background-color: #FAFAFA; }
+
 body {
   max-width: 900px;
   margin: 0 auto; }
@@ -41,6 +44,19 @@ body {
 
 * {
   list-style: none; }
+
+.header-container {
+  margin: 30px 0px;
+  text-align: center; }
+  .header-container .header-one {
+    font-family: "Avenir-Medium";
+    color: #66CDAA;
+    font-size: 2.5em; }
+  .header-container .header-sub {
+    font-family: "Avenir-Regular";
+    color: #bababa;
+    font-size: 1.5em;
+    margin: 5px 0px; }
 
 .react-autosuggest__container {
   position: relative; }
@@ -69,16 +85,17 @@ body {
   border: 1px solid #e2e2e2; }
 
 .highlight {
-  color: #ee0000;
-  font-weight: bold; }
+  color: #24CF5F;
+  font-family: "Avenir-Medium"; }
 
 .react-autosuggest__suggestion--focused .highlight {
-  color: #120000; }
+  color: #24CF5F; }
 
 .artist-name {
   font-family: 'Avenir-Regular';
   font-size: 1em;
-  color: #333; }
+  color: #333;
+  margin-left: 20px; }
 
 .artist-img {
   width: 70px;
@@ -91,17 +108,23 @@ body {
 .suggestion-container {
   border-bottom: 1px solid #e2e2e2; }
   .suggestion-container:hover {
-    background-color: #FAFAFA; }
+    background-color: #e2e2e2; }
 
 .inner-suggestion-container {
   padding: 10px 20px; }
   .inner-suggestion-container img, .inner-suggestion-container div {
     display: inline-block;
     vertical-align: middle; }
-  .inner-suggestion-container p {
-    color: #666666;
-    margin-left: 20px;
-    font-size: 1.5em; }
+  .inner-suggestion-container span {
+    font-size: 1.5em;
+    font-family: "Avenir-Regular";
+    color: #666; }
+  .inner-suggestion-container span.highlight {
+    color: #24CF5F;
+    font-family: "Avenir-Medium"; }
+
+.marginLeft {
+  margin-left: 20px; }
 
 .generate_container {
   margin-top: 80px; }

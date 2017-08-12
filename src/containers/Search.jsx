@@ -3,7 +3,7 @@ import * as _ from 'underscore';
 import $ from 'jquery'
 import Autosuggest from 'react-autosuggest';
 var match = require('autosuggest-highlight/match');
-var parse = require('autosuggest-highlight/match');
+var parse = require('autosuggest-highlight/parse');
 
 
 var RAPGENIUS_ACCESS_TOKEN = "WJCDe9kbzfhPQnwzBXQcMw8JExlRMefEWN19V0elsOMNhriiJodaO9Ld6hQ2TZn9";
@@ -12,17 +12,21 @@ var ARTIST_SEARCH_ENDPOINT = decodeURIComponent('https%3A%2F%2Fapi.genius.com%2F
 // render one item on the list
 const renderSuggestion = (artist, { query }) => {
   const matches = match(artist.name, query);
-  if (matches.length) {
-  	console.log(matches);
-  	const parts = parse(artist.name, matches);
-  }
+  const parts = parse(artist.name, matches);
   return (
     <a className = "suggestion-link" href = {`/ai/${artist.id}`}><div>
       <div className = "suggestion-container">
       	<div className = "inner-suggestion-container">
 	      	<img src = {artist.image_url} className = "artist-img"/>
-	      	<div>
-	      		<p className = "artist-name">{artist.name}</p>
+	      	<div className = "marginLeft">
+	      		{
+	      			parts.map((part, index) => {
+			            const className = part.highlight ? 'highlight' : null;
+			            return (
+			              <span className={className} key={index}>{part.text}</span>
+			            );
+		        	})
+	      		}
 	      	</div>
       	</div>
       </div>
@@ -105,6 +109,10 @@ export default class Search extends Component {
 	    };
 	    return (
 	      <div className = "child">
+	      	<div className = "header-container">
+	      		<p className = "header-one">Rap.ai</p>
+	      		<p className = "header-sub">Generate lyrics by studying previous records</p>
+	      	</div>
 	        <Autosuggest
 		        suggestions={artists}
 		        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
