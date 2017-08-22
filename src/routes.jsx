@@ -9,7 +9,7 @@ export default (
   <div>
   	<Route path="/" component={Search} />
   	<Route path="/search" component={Search} />
-	<Route path="/ai/:artist" component={Generate} />
+	<Route path="/ai/:artist/:lines" component={Generate} />
   </div>
 );
 

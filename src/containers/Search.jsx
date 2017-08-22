@@ -14,7 +14,7 @@ const renderSuggestion = (artist, { query }) => {
   const matches = match(artist.name, query);
   const parts = parse(artist.name, matches);
   return (
-    <a className = "suggestion-link" href = {`/ai/${artist.id}`}><div>
+    <a className = "suggestion-link" href = {`/ai/${artist.id}/5`}><div>
       <div className = "suggestion-container">
       	<div className = "inner-suggestion-container">
 	      	<img src = {artist.image_url} className = "artist-img"/>
