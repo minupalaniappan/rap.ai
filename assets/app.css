@@ -31,13 +31,7 @@
 html {
   width: 100%;
   height: 100%;
-  background: #f7fbfb;
-  background: -moz-linear-gradient(top, #f7f7f7 0%, #f7fbfb 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f7f7f7), color-stop(100%, #f7fbfb));
-  background: -webkit-linear-gradient(top, #f7f7f7 0%, #f7fbfb 100%);
-  background: -o-linear-gradient(top, #f7f7f7 0%, #f7fbfb 100%);
-  background: linear-gradient(to bottom, #f7f7f7 0%, #f7fbfb 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#f7f7f7, endColorstr=#f7fbfb); }
+  background: #f7fbfb; }
 
 body {
   max-width: 900px;
@@ -79,15 +73,27 @@ body {
   font-size: 0.9em;
   font-family: "Avenir-Medium"; }
 
+.text-wrapper {
+  display: block;
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  text-align: center; }
+
 .music-lyric {
   font-family: "Avenir-Regular";
   color: black;
   font-size: 1.4em;
   line-height: 1.5em;
-  width: 300px;
-  margin: 0 auto;
-  padding: 15px 0px;
-  text-align: left; }
+  text-align: left;
+  display: inline; }
+  .music-lyric span {
+    display: inline; }
+  .music-lyric:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    background-color: #8cffba; }
 
 .lyric-container {
   margin: 15px 0px; }

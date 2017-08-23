@@ -110,7 +110,7 @@ export default class Generate extends Component {
 
 	styleText(lyric) {
 		return (
-			<p className = "music-lyric" key = {Math.random()}>{lyric}</p>
+			<div className="text-wrapper" key = {Math.random()}><p className = "music-lyric" key = {Math.random()}><span>{lyric}</span></p></div>
 		)
 	}
 
