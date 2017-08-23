@@ -42,9 +42,13 @@ export default class Generate extends Component {
 		this.state = {
 			data: "", 
 			lines: this.props.params.lines, 
-			isLoading: true
+			chosenLines: null,
+			isLoading: true,
+			inspiration: null,
+			regenerate: true
 		}
 		this.setLineCount = this.setLineCount.bind(this);
+		this.loadInspiration = this.loadInspiration.bind(this);
 
 	}
 
@@ -70,7 +74,8 @@ export default class Generate extends Component {
 		  success: (data) => {
 		  	that.setState({
 		  		isLoading: false,
-		  		data: data
+		  		data: data,
+		  		regenerate: true
 		  	});
 		  },
 		  dataType: "json"
@@ -87,21 +92,37 @@ export default class Generate extends Component {
 		var artist = this.props.params.artist;
 		var line = event.target.dataset.line;
 		this.setState({
-			lines: line
+			lines: line,
+			regenerate: true
 		}, () => {
 			browserHistory.push('/ai/'+ artist +'/' + line);
+		});
+	}
+
+	loadInspiration(event) {
+		var line = event.target.dataset.text;
+		this.setState({
+			inspiration: line, 
+			regenerate: false
 		});
 	}
 
 	loadLyrics(tot) {
 		var lyrics = [];
 		var styleLyrics = this.styleText;
-		var currDATA = getRandom(DATA, tot);
+		var currDATA;
+		if (!this.state.regenerate) {
+			currDATA = this.state.chosenLines;
+		} else {
+			currDATA = getRandom(DATA, tot);
+			this.setState({
+				chosenLines: currDATA,
+				regenerate: false
+			});
+		}
 		currDATA.forEach((elem) => {
 			lyrics.push(styleLyrics(elem));
 		});
-
-
 		return (
 			<div className = "lyric-container">
 				{ lyrics }
@@ -110,7 +131,7 @@ export default class Generate extends Component {
 
 	styleText(lyric) {
 		return (
-			<div className="text-wrapper" key = {Math.random()}><p className = "music-lyric" key = {Math.random()}><span>{lyric}</span></p></div>
+			<div className="text-wrapper" key = {Math.random()} onClick={this.loadInspiration} data-text={lyric}><p className = "music-lyric" key = {Math.random()}><span>{lyric}</span></p></div>
 		)
 	}
 
