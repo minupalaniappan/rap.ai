@@ -6,48 +6,17 @@ import $ from 'jquery'
 
 var RAPGENIUS_ACCESS_TOKEN = "WJCDe9kbzfhPQnwzBXQcMw8JExlRMefEWN19V0elsOMNhriiJodaO9Ld6hQ2TZn9";
 var ARTIST_SEARCH_ENDPOINT = decodeURIComponent('https%3A%2F%2Fapi.genius.com%2Fartists');
-var DATA = [
-	"Know what I'm sayin'?",
-	"Fuck what y'all niggas doin'",
-	"What you got goin' on, what's happenin'?",
-	"Yeah, know what I'm sayin'?",
-	"Real niggas in this mothafucka, mane",
-	"Hell yeah, y'all niggas lame as hell",
-	"Y'all niggas, man, know what I'm sayin'?",
-	"If Young Metro don't trust you, I'm gon' shoot you",
-	"Hey!",
-	"Know what I'm sayin'?",
-	"Fuck what y'all niggas doin'",
-	"What you got goin' on, what's happenin'?",
-	"Yeah, know what I'm sayin'?",
-	"Real niggas in this mothafucka, mane",
-	"Hell yeah, y'all niggas lame as hell",
-	"Y'all niggas, man, know what I'm sayin'?",
-	"If Young Metro don't trust you, I'm gon' shoot you",
-	"Hey!",
-	"Know what I'm sayin'?",
-	"Fuck what y'all niggas doin'",
-	"What you got goin' on, what's happenin'?",
-	"Yeah, know what I'm sayin'?",
-	"Real niggas in this mothafucka, mane",
-	"Hell yeah, y'all niggas lame as hell",
-	"Y'all niggas, man, know what I'm sayin'?",
-	"If Young Metro don't trust you, I'm gon' shoot you",
-	"Hey!"
-]
+var LYRIC_ENDPOINT = decodeURIComponent('https%3A%2F%2Fimmense-bastion-22463.herokuapp.com%2Fartist');
 
 export default class Generate extends Component {
 	constructor (props) {
 		super(props);
 		this.state = {
 			data: "", 
-			lines: this.props.params.lines, 
-			chosenLines: null,
+			linesContent: null,
 			isLoading: true,
-			inspiration: null,
-			regenerate: true
+			inspiration: null
 		}
-		this.setLineCount = this.setLineCount.bind(this);
 		this.loadInspiration = this.loadInspiration.bind(this);
 
 	}
@@ -57,6 +26,13 @@ export default class Generate extends Component {
 		getData(this.props.params.artist, (data) => {
 			that.setState({
 				data: data.response.artist
+			}, () => {
+				getLyrics(data.response.artist.name, (data) => {
+					that.setState({
+						linesContent: data, 
+						isLoading: false
+					})
+				});
 			});
 		});
 	}
@@ -65,63 +41,25 @@ export default class Generate extends Component {
 		/* perform ajax */ 
 	}
 
-	load() {
-		var lines = this.props.params.lines;
-		var artist = this.props.params.artist;
-		var that = this;
-		$.ajax({
-		  url: "",
-		  success: (data) => {
-		  	that.setState({
-		  		isLoading: false,
-		  		data: data,
-		  		regenerate: true
-		  	});
-		  },
-		  dataType: "json"
-		});
-	}
-
 	componentDidUpdate() {
 	}
 
 	componentWillUnmount() {
 	}
 
-	setLineCount(event) {
-		var artist = this.props.params.artist;
-		var line = event.target.dataset.line;
-		this.setState({
-			lines: line,
-			regenerate: true
-		}, () => {
-			browserHistory.push('/ai/'+ artist +'/' + line);
-		});
-	}
-
 	loadInspiration(event) {
 		var line = event.target.dataset.text;
 		this.setState({
-			inspiration: line, 
-			regenerate: false
+			inspiration: line
 		});
 	}
 
-	loadLyrics(tot) {
+	loadLyrics() {
 		var lyrics = [];
 		var styleLyrics = this.styleText;
-		var currDATA;
-		if (!this.state.regenerate) {
-			currDATA = this.state.chosenLines;
-		} else {
-			currDATA = getRandom(DATA, tot);
-			this.setState({
-				chosenLines: currDATA,
-				regenerate: false
-			});
-		}
-		currDATA.forEach((elem) => {
-			lyrics.push(styleLyrics(elem));
+		var loadInsp = this.loadInspiration;
+		this.state.linesContent.forEach((elem) => {
+			lyrics.push(styleLyrics(elem, loadInsp));
 		});
 		return (
 			<div className = "lyric-container">
@@ -129,27 +67,18 @@ export default class Generate extends Component {
 			</div>);
 	}
 
-	styleText(lyric) {
+	styleText(lyric, loadInspiration) {
 		return (
-			<div className="text-wrapper" key = {Math.random()} onClick={this.loadInspiration} data-text={lyric}><p className = "music-lyric" key = {Math.random()}><span>{lyric}</span></p></div>
-		)
-	}
-
-	renderButtonClass() {
-		return (
-			<div className = "button-lc">
-				<p className = "lineCount">Line count: </p>
-				<button data-line="5" className={(this.state.lines === "5") ? "active" : "non-active"} onClick={this.setLineCount}>Five</button>
-				<button data-line="10" className={(this.state.lines === "10") ? "active" : "non-active"} onClick={this.setLineCount}>Ten</button>
-				<button data-line="20" className={(this.state.lines === "20") ? "active" : "non-active" } onClick={this.setLineCount}>Twenty</button>
-			</div>
+			<div className="text-wrapper" key = {Math.random()} onClick={loadInspiration} data-text={lyric}><p className = "music-lyric" key = {Math.random()}><span>{lyric}</span></p></div>
 		)
 	}
 
 	render() {
 		var artist = this.state.data;
-		var buttonClass = this.renderButtonClass();
-		var lyrics = this.loadLyrics(this.state.lines);
+		var lyrics = (<div className = "pad"><p className = "music-lyric-non">Sit tight ... we're crunching lyrics!</p></div>)
+		if (!this.state.isLoading) {
+			lyrics = this.loadLyrics();
+		}
 		return (
 			<div className="generate_container">
 				<div className = "artist_header">
@@ -158,12 +87,26 @@ export default class Generate extends Component {
 						<p className="name">{artist.name}</p>
 						<a href = {"https://twitter.com/" + artist.twitter_name}><img className = "social" src={"https://upload.wikimedia.org/wikipedia/fr/archive/c/c8/20160903181213%21Twitter_Bird.svg"}/></a>
 					</div>
-					{ buttonClass }
 					{ lyrics }
 				</div>
 			</div>
 		);
 	}
+}
+
+var getLyrics = (artist, callback) => {
+	$.ajax({
+	  beforeSend: function(xhr) {
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+      },
+	  url: LYRIC_ENDPOINT+"/"+artist,
+	  type: "GET", 
+	  dataType: "json",
+	  success: (data) => {
+	  	callback(data);
+	  }
+	});
+
 }
 
 var getData = (id, callback) => {
@@ -180,19 +123,4 @@ var getData = (id, callback) => {
 		}
 	});
 }
-
-var getRandom = (arr, n) => {
-    var result = new Array(n),
-        len = arr.length,
-        taken = new Array(len);
-    if (n > len)
-        throw new RangeError("getRandom: more elements taken than available");
-    while (n--) {
-        var x = Math.floor(Math.random() * len);
-        result[n] = arr[x in taken ? taken[x] : x];
-        taken[x] = --len;
-    }
-    return result;
-}
-
 
