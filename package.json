@@ -25,7 +25,7 @@
     "server:prod": "NODE_ENV=production nodemon server.js",
     "css": "node-sass --include-path scss src/style/app.scss assets/app.css",
     "watch-css": "nodemon -e scss -x \"npm run css\"",
-    "heroku-postbuild": "webpack -p --config ./webpack.prod.config.js --progress"
+    "heroku-postbuild": "npm run clean && NODE_ENV=development webpack -d && node-sass --include-path scss src/style/app.scss assets/app.css"
   },
   "dependencies": {
     "autosuggest-highlight": "^3.1.0",
