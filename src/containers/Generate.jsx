@@ -2,12 +2,14 @@ import React, { Component, PropTypes } from 'react';
 import { browserHistory } from 'react-router';
 
 import * as _ from 'underscore';
-import $ from 'jquery'
+import $ from 'jquery';
 
 var RAPGENIUS_ACCESS_TOKEN = "WJCDe9kbzfhPQnwzBXQcMw8JExlRMefEWN19V0elsOMNhriiJodaO9Ld6hQ2TZn9";
 var ARTIST_SEARCH_ENDPOINT = decodeURIComponent('https%3A%2F%2Fapi.genius.com%2Fartists');
+var INSPIRE_SEARCH_ENDPOINT = decodeURIComponent('https%3A%2F%2Fapi.genius.com%2Fsearch');
 var LYRIC_ENDPOINT = decodeURIComponent('https%3A%2F%2Fimmense-bastion-22463.herokuapp.com%2Fartist');
-
+var YTKEY = 'AIzaSyB4qGtZK7NOQ87Y5L_wmktkQ8dTblqoc1c'
+var YTLINK = decodeURIComponent('https%3A%2F%2Fwww.googleapis.com%2Fyoutube%2Fv3%2Fsearch')
 export default class Generate extends Component {
 	constructor (props) {
 		super(props);
@@ -49,8 +51,20 @@ export default class Generate extends Component {
 
 	loadInspiration(event) {
 		var line = event.target.dataset.text;
-		this.setState({
-			inspiration: line
+		var that = this;
+		findSongPerLyric(line, (data) => {
+			var url; 
+			var hits = data.response.hits;
+			if (hits.length) {
+				findVideo(hits[0].result.full_title, (data) => {
+					console.log(data.items[0].id.videoId);
+					if (data.items) {
+						that.setState({
+							inspiration: data.items[0].id.videoId
+						});
+					}
+				})
+			}
 		});
 	}
 
@@ -69,7 +83,7 @@ export default class Generate extends Component {
 
 	styleText(lyric, loadInspiration) {
 		return (
-			<div className="text-wrapper" key = {Math.random()} onClick={loadInspiration} data-text={lyric}><p className = "music-lyric" key = {Math.random()}><span>{lyric}</span></p></div>
+			<div className="text-wrapper" key = {Math.random()}><p className = "music-lyric" key = {Math.random()}><span onClick={loadInspiration} data-text={lyric}>{lyric}</span></p></div>
 		)
 	}
 
@@ -123,4 +137,37 @@ var getData = (id, callback) => {
 		}
 	});
 }
+
+var findSongPerLyric = (lyric, callback) => {
+	$.ajax({
+		url: INSPIRE_SEARCH_ENDPOINT,
+		type: "GET", 
+		dataType: 'json',
+		data: {
+			"access_token": RAPGENIUS_ACCESS_TOKEN,
+			"q": lyric
+		},
+		success: (data) => {
+			callback(data);
+		}
+	});
+}
+
+var findVideo = (song, callback) => {
+	$.ajax({
+		url: YTLINK,
+		type: "GET", 
+		dataType: 'json',
+		data: {             
+            "maxResults": 25,
+            "part": "snippet",                               
+			"key": YTKEY,
+			"q": song
+		},
+		success: (data) => {
+			callback(data);
+		}
+	});
+}
+
 
