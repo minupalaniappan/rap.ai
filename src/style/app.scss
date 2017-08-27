@@ -175,3 +175,24 @@
 ::-ms-input-placeholder { /* Microsoft Edge */
    color:    #c6c6c6;
 }
+
+.yt-video-style {
+	display: inline-block;
+	float: right;
+    position: absolute;
+    right: 0px;
+}
+
+.inspiredby {
+	font-family: "Avenir-Medium";
+    color: black;
+    font-size: 1.4em;
+    line-height: 1.5em;
+    text-align: left; 
+    margin: 10px 0px;
+}
+
+iframe {
+	border: 3px solid #24CF5F;
+	border-radius: 3px;
+}

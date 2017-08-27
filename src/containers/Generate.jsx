@@ -4,6 +4,9 @@ import { browserHistory } from 'react-router';
 import * as _ from 'underscore';
 import $ from 'jquery';
 
+import YouTube from 'react-youtube'
+
+
 var RAPGENIUS_ACCESS_TOKEN = "WJCDe9kbzfhPQnwzBXQcMw8JExlRMefEWN19V0elsOMNhriiJodaO9Ld6hQ2TZn9";
 var ARTIST_SEARCH_ENDPOINT = decodeURIComponent('https%3A%2F%2Fapi.genius.com%2Fartists');
 var INSPIRE_SEARCH_ENDPOINT = decodeURIComponent('https%3A%2F%2Fapi.genius.com%2Fsearch');
@@ -17,7 +20,8 @@ export default class Generate extends Component {
 			data: "", 
 			linesContent: null,
 			isLoading: true,
-			inspiration: null
+			inspiration: null,
+			selectedText: null
 		}
 		this.loadInspiration = this.loadInspiration.bind(this);
 
@@ -49,18 +53,35 @@ export default class Generate extends Component {
 	componentWillUnmount() {
 	}
 
+	generateYoutubeVideo(id) {
+		const opts = {
+	      height: '240',
+	      width: '400',
+	      playerVars: { // https://developers.google.com/youtube/player_parameters 
+	        autoplay: 1
+	      }
+	    };
+		var yt = (<div><p className = "inspiredby">Inspired by...</p><YouTube
+				  videoId={id}            
+				  opts={opts}
+				/></div>);
+
+		return (yt);
+	}
+
 	loadInspiration(event) {
 		var line = event.target.dataset.text;
+		var randid = event.target.dataset.randid;
 		var that = this;
 		findSongPerLyric(line, (data) => {
 			var url; 
 			var hits = data.response.hits;
 			if (hits.length) {
 				findVideo(hits[0].result.full_title, (data) => {
-					console.log(data.items[0].id.videoId);
 					if (data.items) {
 						that.setState({
-							inspiration: data.items[0].id.videoId
+							inspiration: data.items[0].id.videoId, 
+							selectedText: line
 						});
 					}
 				})
@@ -71,9 +92,11 @@ export default class Generate extends Component {
 	loadLyrics() {
 		var lyrics = [];
 		var styleLyrics = this.styleText;
+		var state = this.state;
 		var loadInsp = this.loadInspiration;
+		var genVid = this.generateYoutubeVideo;
 		this.state.linesContent.forEach((elem) => {
-			lyrics.push(styleLyrics(elem, loadInsp));
+			lyrics.push(styleLyrics(elem, loadInsp, state, genVid));
 		});
 		return (
 			<div className = "lyric-container">
@@ -81,9 +104,18 @@ export default class Generate extends Component {
 			</div>);
 	}
 
-	styleText(lyric, loadInspiration) {
+	styleText(lyric, loadInspiration, state, ytfunc) {
+		var yt;
+		if (state.inspiration && lyric === state.selectedText) {
+			yt = ytfunc(state.inspiration);
+		}
 		return (
-			<div className="text-wrapper" key = {Math.random()}><p className = "music-lyric" key = {Math.random()}><span onClick={loadInspiration} data-text={lyric}>{lyric}</span></p></div>
+			<div className="text-wrapper" key = {Math.random()}>
+				<p className = "music-lyric" key = {Math.random()}>
+					<span onClick={loadInspiration} data-text={lyric} data-randid={Math.random()}>{lyric}</span>
+				</p>
+				<div className = "yt-video-style">{yt}</div>
+			</div>
 		)
 	}
 
