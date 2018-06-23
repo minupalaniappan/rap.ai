@@ -28,9 +28,9 @@
     "heroku-postbuild": "npm run clean && NODE_ENV=development webpack -d && node-sass --include-path scss src/style/app.scss assets/app.css"
   },
   "dependencies": {
-    "autosuggest-highlight": "^3.1.0",
-    "babel-cli": "^6.24.0",
-    "babel-core": "^6.10.4",
+    "autosuggest-highlight": "^3.1.1",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
     "babel-eslint": "6.1.2",
     "babel-loader": "^6.2.4",
     "babel-plugin-root-import": "^5.1.0",
@@ -41,7 +41,7 @@
     "babel-preset-react-hmre": "1.1.1",
     "babel-preset-stage-0": "6.5.0",
     "babel-preset-stage-2": "^6.22.0",
-    "babel-register": "^6.24.0",
+    "babel-register": "^6.26.0",
     "babel-root-import": "4.0.1",
     "connect-history-api-fallback": "1.2.0",
     "dotenv": "2.0.0",
@@ -52,36 +52,33 @@
     "eslint-plugin-import": "1.10.2",
     "eslint-plugin-jsx-a11y": "2.0.0",
     "eslint-plugin-react": "5.2.2",
-    "evil-icons": "^1.9.0",
-    "express": "4.14.0",
+    "evil-icons": "^1.10.1",
+    "express": "^4.16.3",
     "getenv": "0.6.0",
     "http": "0.0.0",
     "isdev": "1.0.1",
-    "node-sass": "^4.5.1",
-    "nodemon": "^1.11.0",
+    "node-sass": "^4.9.0",
+    "nodemon": "^1.17.5",
     "package.json": "^2.0.1",
     "react": "15.6.0",
-    "react-autosuggest": "^9.3.2",
-    "react-dom": "^15.6.0",
-    "react-evil-icons": "^0.4.0",
+    "react-autosuggest": "^9.3.4",
+    "react-dom": "^15.6.2",
+    "react-evil-icons": "^0.5.0",
     "react-router": "2.5.2",
     "react-timer": "^1.0.2",
-    "serve-static": "1.11.1",
-    "underscore": "^1.8.3",
+    "serve-static": "^1.13.2",
+    "underscore": "^1.9.1",
     "webpack": "1.13.1",
     "webpack-dev-middleware": "1.6.1",
     "webpack-hot-middleware": "2.12.1",
     "webpack-merge": "0.14.0",
-    "whatwg-fetch": "^2.0.3",
+    "whatwg-fetch": "^2.0.4",
     "winston": "2.2.0",
-    "jquery": "^3.2.1"
+    "react-youtube": "^7.6.0"
   },
   "peerDependencies": {
     "react": "15.2.0",
     "react-dom": "15.6.0"
   },
-  "devDependencies": {
-    "jquery": "^3.2.1",
-    "react-youtube": "^7.4.0"
-  }
+  "devDependencies": {}
 }
