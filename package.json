@@ -8,8 +8,8 @@
     "url": ""
   },
   "engines": {
-    "node": "7.4.0",
-    "npm": "4.0.5"
+    "node": "8.9.4",
+    "npm": "5.6.x"
   },
   "keywords": [],
   "author": "Minu Palaniappan <mspal@ucdavis.edu>",
@@ -74,11 +74,11 @@
     "webpack-merge": "0.14.0",
     "whatwg-fetch": "^2.0.4",
     "winston": "2.2.0",
-    "react-youtube": "^7.6.0"
+    "react-youtube": "^7.6.0",
+    "jquery": "^3.3.1"
   },
   "peerDependencies": {
     "react": "15.2.0",
     "react-dom": "15.6.0"
-  },
-  "devDependencies": {}
+  }
 }
